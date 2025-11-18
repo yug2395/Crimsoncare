@@ -1,0 +1,31 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.db
+.env
+.venv/
+venv/
+env/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Python build artifacts ---
+build/
+dist/
+*.egg-info/
+
+# --- IDE configs ---
+.vscode/
+.idea/
+
+# --- Node/Frontend (in case you add tools later) ---
+node_modules/
+*.lock

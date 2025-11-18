@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CrimsonCare</title>
+    <link rel="icon" type="image/png" href="CrimsonCare_logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="CrimsonCare_logo.png" alt="CrimsonCare Logo" class="logo-img">
+                    <span>CrimsonCare</span>
+                </a>
+            </div>
+            <nav class="header-center">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blood-banks.html" class="nav-link">Blood Banks</a>
+                <a href="camps.html" class="nav-link">Camps</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+            </nav>
+            <div class="header-right">
+                <a href="information.html" class="user-icon" title="Profile">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                </a>
+                <a href="#" class="user-icon" onclick="event.preventDefault(); logout();" title="Logout"
+                    style="margin-left: 10px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Contact Us</h1>
+        <p>We're here to help. Reach out to us anytime!</p>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="content-section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <!-- Contact Form -->
+                <div class="form-container">
+                    <h2 style="color: #C41E3A; margin-bottom: 20px;">Send Us a Message</h2>
+                    <form id="contact-form" onsubmit="handleContactForm(event)">
+                        <div class="form-group">
+                            <label for="contact-name">Name *</label>
+                            <input type="text" id="contact-name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email">Email *</label>
+                            <input type="email" id="contact-email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-phone">Phone Number</label>
+                            <input type="tel" id="contact-phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-subject">Subject *</label>
+                            <select id="contact-subject" name="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="donor">Donor Registration</option>
+                                <option value="recipient">Blood Request</option>
+                                <option value="bloodbank">Blood Bank Partnership</option>
+                                <option value="camp">Organize a Camp</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-message">Message *</label>
+                            <textarea id="contact-message" name="message" rows="5" required></textarea>
+                        </div>
+
+                        <div class="form-group" style="text-align: center; margin-top: 30px;">
+                            <button type="submit" class="submit-button">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <div style="background-color: #F9FAFB; padding: 30px; border-radius: 12px; margin-bottom: 30px;">
+                        <h2 style="color: #C41E3A; margin-bottom: 20px;">Get in Touch</h2>
+
+                        <div style="margin-bottom: 25px;">
+                            <h3
+                                style="color: #1E1E1E; font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C41E3A"
+                                    stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Address
+                            </h3>
+                            <p style="color: #2E2E2E; line-height: 1.6;">
+                                CrimsonCare Headquarters<br>
+                                123 Main Street<br>
+                                Dehradun, Uttarakhand 248001<br>
+                                India
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <h3
+                                style="color: #1E1E1E; font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C41E3A"
+                                    stroke-width="2">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                </svg>
+                                Phone
+                            </h3>
+                            <p style="color: #2E2E2E; line-height: 1.6;">
+                                Emergency: +91-1234567890<br>
+                                Support: +91-1234567891<br>
+                                Toll-Free: 1800-XXX-XXXX
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <h3
+                                style="color: #1E1E1E; font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C41E3A"
+                                    stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                                Email
+                            </h3>
+                            <p style="color: #2E2E2E; line-height: 1.6;">
+                                General: info@crimsoncare.com<br>
+                                Donor Support: donors@crimsoncare.com<br>
+                                Partnerships: partners@crimsoncare.com
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3
+                                style="color: #1E1E1E; font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C41E3A"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                                Hours
+                            </h3>
+                            <p style="color: #2E2E2E; line-height: 1.6;">
+                                Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                Saturday: 9:00 AM - 2:00 PM<br>
+                                Sunday: Closed<br>
+                                <strong style="color: #C41E3A;">Emergency Helpline: 24/7</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Notice -->
+                    <div
+                        style="background-color: #FEE2E2; padding: 20px; border-radius: 12px; border-left: 4px solid #DC2626;">
+                        <h3 style="color: #DC2626; font-size: 18px; margin-bottom: 10px;">🚨 Emergency?</h3>
+                        <p style="color: #7F1D1D; line-height: 1.6;">
+                            If you need urgent blood, please call our 24/7 emergency helpline at
+                            <strong>+91-1234567890</strong> or use the "Request Blood" button on the homepage for
+                            immediate assistance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div style="background-color: #F9FAFB; padding: 40px; border-radius: 12px; margin-top: 40px;">
+                <h2 style="color: #C41E3A; text-align: center; margin-bottom: 30px;">Frequently Asked Questions</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div>
+                        <h3 style="color: #1E1E1E; font-size: 16px; margin-bottom: 8px;">How do I register as a donor?
+                        </h3>
+                        <p style="color: #2E2E2E; font-size: 14px; line-height: 1.6;">Visit our User Information page or
+                            click the "Donate Blood" button on the homepage to register.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: #1E1E1E; font-size: 16px; margin-bottom: 8px;">How often can I donate blood?
+                        </h3>
+                        <p style="color: #2E2E2E; font-size: 14px; line-height: 1.6;">You can donate whole blood every 3
+                            months (90 days) safely.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: #1E1E1E; font-size: 16px; margin-bottom: 8px;">Is my information secure?</h3>
+                        <p style="color: #2E2E2E; font-size: 14px; line-height: 1.6;">Yes, we use enterprise-grade
+                            security to protect all personal and medical information.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: #1E1E1E; font-size: 16px; margin-bottom: 8px;">How do I request blood?</h3>
+                        <p style="color: #2E2E2E; font-size: 14px; line-height: 1.6;">Click "Request Blood" on the
+                            homepage or call our emergency helpline for urgent needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h3>CrimsonCare</h3>
+                <p class="tagline">"One drop. Endless hope."</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="blood-banks.html">Blood Banks</a>
+                <a href="camps.html">Camps</a>
+                <a href="leaderboard.html">Leaderboard</a>
+                <a href="information.html">User Info</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@crimsoncare.com</p>
+                <p>Phone: +91-1234567890</p>
+                <p>Address: Dehradun, Uttarakhand, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 CrimsonCare by SysNexis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function handleContactForm(e) {
+            e.preventDefault();
+            alert('Thank you for contacting us! We will get back to you within 24 hours.');
+            document.getElementById('contact-form').reset();
+            return false;
+        }
+    </script>
+</body>
+
+</html>

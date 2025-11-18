@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Banks - CrimsonCare</title>
+    <link rel="icon" type="image/png" href="CrimsonCare_logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="CrimsonCare_logo.png" alt="CrimsonCare Logo" class="logo-img">
+                    <span>CrimsonCare</span>
+                </a>
+            </div>
+            <nav class="header-center">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blood-banks.html" class="nav-link active">Blood Banks</a>
+                <a href="camps.html" class="nav-link">Camps</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+            </nav>
+            <div class="header-right">
+                <a href="information.html" class="user-icon" title="Profile">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                </a>
+                <a href="#" class="user-icon" onclick="event.preventDefault(); logout();" title="Logout"
+                    style="margin-left: 10px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Blood Banks Directory</h1>
+        <p>Find verified blood banks near you with real-time inventory status</p>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="search-filter-section">
+        <div class="container">
+            <div class="search-filter-bar">
+                <input type="text" id="search-input" class="search-input" placeholder="Search by name or location..."
+                    onkeyup="searchBloodBanks()">
+                <select id="filter-select" class="filter-select" onchange="filterBloodBanks()">
+                    <option value="all">All Status</option>
+                    <option value="available">Available</option>
+                    <option value="low">Low Stock</option>
+                    <option value="critical">Critical</option>
+                </select>
+                <button class="search-button" onclick="searchBloodBanks()">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blood Banks List -->
+    <section class="content-section">
+        <div class="container">
+            <div id="blood-banks-list">
+                <!-- Dynamic content loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h3>CrimsonCare</h3>
+                <p class="tagline">"One drop. Endless hope."</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="blood-banks.html">Blood Banks</a>
+                <a href="camps.html">Camps</a>
+                <a href="leaderboard.html">Leaderboard</a>
+                <a href="information.html">User Info</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@crimsoncare.com</p>
+                <p>Phone: +91-1234567890</p>
+                <p>Address: Dehradun, Uttarakhand, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 CrimsonCare by SysNexis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Blood - CrimsonCare</title>
+    <link rel="icon" type="image/png" href="CrimsonCare_logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet Control Geocoder CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@perliedman/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <style>
+        .leaflet-control-geocoder-form input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="CrimsonCare_logo.png" alt="CrimsonCare Logo" class="logo-img">
+                    <span>CrimsonCare</span>
+                </a>
+            </div>
+            <nav class="header-center">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blood-banks.html" class="nav-link">Blood Banks</a>
+                <a href="camps.html" class="nav-link">Camps</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+            </nav>
+            <div class="header-right">
+                <a href="information.html" class="user-icon" title="Profile">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                </a>
+                <a href="#" class="user-icon" onclick="event.preventDefault(); logout();" title="Logout"
+                    style="margin-left: 10px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Request Blood</h1>
+        <p>Every second counts. Submit your request and we'll connect you with donors immediately.</p>
+    </section>
+
+    <!-- Request Blood Form -->
+    <section class="content-section">
+        <div class="container">
+            <div class="form-container">
+                <div
+                    style="background-color: #FEF3C7; padding: 20px; border-radius: 12px; margin-bottom: 30px; border-left: 4px solid #F59E0B;">
+                    <h3 style="color: #92400E; margin-bottom: 10px;">⚡ Quick Response Team</h3>
+                    <p style="color: #78350F; line-height: 1.6;">
+                        Our system will immediately alert matching donors in your area. For critical emergencies, please
+                        also call our 24/7 helpline: <strong>+91-1234567890</strong>
+                    </p>
+                </div>
+
+                <form id="request-blood-form" onsubmit="handleBloodRequest(event)">
+                    <h2 style="color: #C41E3A; margin-bottom: 25px;">Patient Information</h2>
+
+                    <div class="form-group">
+                        <label for="patient-name">Patient Name *</label>
+                        <input type="text" id="patient-name" name="patient_name" required
+                            placeholder="Enter patient's full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="relation">Your Relation to Patient *</label>
+                        <select id="relation" name="relation_to_patient" required>
+                            <option value="">Select Relation</option>
+                            <option value="self">I am the patient</option>
+                            <option value="family">Family Member</option>
+                            <option value="friend">Friend</option>
+                            <option value="relative">Relative</option>
+                            <option value="caretaker">Caretaker/Guardian</option>
+                            <option value="hospital-staff">Hospital Staff</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="blood-type">Blood Type Needed *</label>
+                            <select id="blood-type" name="blood_type_needed" required>
+                                <option value="">Select Blood Type</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="units-needed">Units Needed</label>
+                            <input type="number" id="units-needed" name="units_needed" min="1" max="10" value="1"
+                                placeholder="Number of units">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="urgency">Urgency Level *</label>
+                        <select id="urgency" name="urgency_level" required onchange="updateUrgencyInfo()">
+                            <option value="">Select Urgency Level</option>
+                            <option value="Critical">Critical - Needed immediately (within hours)</option>
+                            <option value="Urgent">Urgent - Needed within 24 hours</option>
+                            <option value="Moderate">Moderate - Needed within 2-3 days</option>
+                        </select>
+                    </div>
+
+                    <div id="urgency-indicator"
+                        style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <!-- Dynamic urgency information will appear here -->
+                    </div>
+
+                    <h2 style="color: #C41E3A; margin-bottom: 25px; margin-top: 40px;">Contact Information</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name *</label>
+                            <input type="text" id="contact-name" name="your_name" required placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Your Phone Number *</label>
+                            <input type="tel" id="contact-phone" name="your_phone_number" required
+                                placeholder="+91-XXXXXXXXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-email">Your Email (optional)</label>
+                        <input type="email" id="contact-email" name="your_email" placeholder="your.email@example.com">
+                    </div>
+
+                    <h2 style="color: #C41E3A; margin-bottom: 25px; margin-top: 40px;">Location Details</h2>
+
+                    <div class="form-group">
+                        <label for="hospital-name">Hospital/Clinic Name *</label>
+                        <input type="text" id="hospital-name" name="hospital_name" required
+                            placeholder="Enter hospital or clinic name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Complete Address *</label>
+                        <textarea id="address" name="complete_address" rows="3" required
+                            placeholder="Enter complete address including building name, street, landmark..."></textarea>
+                    </div>
+
+                    <!-- Location Picker Map -->
+                    <div class="form-group">
+                        <label>📍 Pinpoint Your Exact Location on Map *</label>
+                        <div style="margin-bottom: 15px;">
+                            <input type="text" id="receiver-search-input"
+                                placeholder="🔍 Search hospital location (e.g., Apollo Hospital Mumbai)..."
+                                style="width: 100%; padding: 10px; border: 1px solid #C41E3A; border-radius: 4px; font-size: 14px;">
+                            <small style="color: #666; display: block; margin-top: 5px;">Type a location and press
+                                Enter, or drag the marker on the map</small>
+                        </div>
+                        <div id="receiver-map"
+                            style="height: 400px; border-radius: 8px; border: 2px solid #C41E3A; margin-bottom: 10px;">
+                        </div>
+                        <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">
+                            <strong>Instructions:</strong> Search for your hospital location using the search box above,
+                            then drag the pin to your exact location. Location is mandatory.
+                        </p>
+                        <input type="hidden" id="receiver-latitude" name="latitude">
+                        <input type="hidden" id="receiver-longitude" name="longitude">
+                        <div id="receiver-location-status"
+                            style="padding: 10px; background-color: #FEE2E2; border-radius: 4px; color: #7F1D1D; display: none;">
+                            ✓ Location selected: <span id="receiver-coords"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <select id="state" name="state" required>
+                                <option value="">Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and
+                                    Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Puducherry">Puducherry</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pincode">Pincode *</label>
+                        <input type="text" id="pincode" name="pincode" required placeholder="Pincode">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additional-info">Additional Information (optional)</label>
+                        <textarea id="additional-info" name="additional_information" rows="3"
+                            placeholder="Any additional details that might help donors (visiting hours, parking information, etc.)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I confirm that the information provided is accurate and I consent to
+                                share this information with potential donors *</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="emergency-contact" name="emergencyContact">
+                            <label for="emergency-contact">Send me SMS/Email updates about donor responses</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="text-align: center; margin-top: 40px;">
+                        <button type="submit" class="submit-button" style="font-size: 18px; padding: 16px 50px;">
+                            🩸 Submit Blood Request
+                        </button>
+                        <p style="margin-top: 15px; color: #2E2E2E; font-size: 14px;">
+                            Your request will be visible to matching donors immediately
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h3>CrimsonCare</h3>
+                <p class="tagline">"One drop. Endless hope."</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="blood-banks.html">Blood Banks</a>
+                <a href="camps.html">Camps</a>
+                <a href="leaderboard.html">Leaderboard</a>
+                <a href="information.html">User Info</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@crimsoncare.com</p>
+                <p>Phone: +91-1234567890</p>
+                <p>Address: Dehradun, Uttarakhand, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 CrimsonCare by SysNexis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Leaflet Control Geocoder JS -->
+    <script src="https://unpkg.com/@perliedman/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script>
+        // Initialize receiver map when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(initReceiverMap, 500);
+        });
+    </script>
+</body>
+
+</html>

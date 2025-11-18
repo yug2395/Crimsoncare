@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - CrimsonCare</title>
+    <link rel="icon" type="image/png" href="CrimsonCare_logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="CrimsonCare_logo.png" alt="CrimsonCare Logo" class="logo-img">
+                    <span>CrimsonCare</span>
+                </a>
+            </div>
+            <nav class="header-center">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blood-banks.html" class="nav-link">Blood Banks</a>
+                <a href="camps.html" class="nav-link">Camps</a>
+                <a href="leaderboard.html" class="nav-link active">Leaderboard</a>
+            </nav>
+            <div class="header-right">
+                <a href="information.html" class="user-icon" title="Profile">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                </a>
+                <a href="#" class="user-icon" onclick="event.preventDefault(); logout();" title="Logout"
+                    style="margin-left: 10px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Donor Leaderboard</h1>
+        <p>Celebrating our community heroes and their life-saving contributions</p>
+    </section>
+
+    <!-- Leaderboard Content -->
+    <section class="content-section">
+        <div class="container">
+            <div class="leaderboard-info"
+                style="text-align: center; margin-bottom: 30px; padding: 20px; background-color: #FEF3C7; border-radius: 12px;">
+                <h3 style="color: #92400E; margin-bottom: 10px;">🏆 Badge System</h3>
+                <p style="color: #78350F;">
+                    <strong>Gold Badge:</strong> 40+ donations |
+                    <strong>Silver Badge:</strong> 20+ donations |
+                    <strong>Bronze Badge:</strong> 10+ donations
+                </p>
+            </div>
+
+            <div class="leaderboard-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th onclick="sortLeaderboard('rank')">Rank</th>
+                            <th onclick="sortLeaderboard('user')">User</th>
+                            <th onclick="sortLeaderboard('donations')">Donations</th>
+                            <th>Badges</th>
+                            <th onclick="sortLeaderboard('lastDonation')">Last Donation</th>
+                            <th onclick="sortLeaderboard('city')">City</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-tbody">
+                        <!-- Dynamic content loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="leaderboard-cta" style="text-align: center; margin-top: 40px;">
+                <h3 style="color: #C41E3A; margin-bottom: 15px;">Want to see your name here?</h3>
+                <p style="margin-bottom: 20px; color: #2E2E2E;">Register as a donor and start saving lives today!</p>
+                <button class="btn btn-primary" onclick="window.location.href='information.html'">Register Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h3>CrimsonCare</h3>
+                <p class="tagline">"One drop. Endless hope."</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="blood-banks.html">Blood Banks</a>
+                <a href="camps.html">Camps</a>
+                <a href="leaderboard.html">Leaderboard</a>
+                <a href="information.html">User Info</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@crimsoncare.com</p>
+                <p>Phone: +91-1234567890</p>
+                <p>Address: Dehradun, Uttarakhand, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 CrimsonCare by SysNexis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
